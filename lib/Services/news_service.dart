@@ -6,10 +6,11 @@ class NewsService {
 
   NewsService(this.dio);
 
-  Future<List<ArticleModel>> getNews() async {
+  Future<List<ArticleModel>> getNews({required String categoryName}) async {
+    final String category = categoryName.toLowerCase();
     try {
       Response response = await dio.get(
-          "https://gnews.io/api/v4/top-headlines?category=general&apikey=d7fae8f71132ee814d4cfbf19915ae33&country=eg");
+          "https://gnews.io/api/v4/top-headlines?category=$category&apikey=d7fae8f71132ee814d4cfbf19915ae33&country=eg");
       Map<String, dynamic> jsonData = response.data;
       List<ArticleModel> articleList = [];
       for (var article in jsonData["articles"]) {
@@ -25,20 +26,20 @@ class NewsService {
       }
       return articleList;
     } catch (e) {
-      print("Error fetching news: $e");
-      return [];
+      throw Exception('Error fetching news');
     }
   }
 
   Future<bool> isValidImageUrl(String url) async {
     try {
       final response = await dio.head(url);
-      if (response.statusCode == 200 && response.headers.value('content-type')?.startsWith('image/') == true) {
+      if (response.statusCode == 200 &&
+          response.headers.value('content-type')?.startsWith('image/') ==
+              true) {
         return true;
       }
       return false;
     } catch (e) {
-      print("Error validating image URL ($url): $e");
       return false;
     }
   }

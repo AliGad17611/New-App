@@ -1,30 +1,11 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/Models/article_model.dart';
-import 'package:news_app/Services/news_service.dart';
 import 'package:news_app/Widgets/new_title.dart';
 
-class NewsListView extends StatefulWidget {
-  const NewsListView({
-    super.key,
-  });
+class NewsListView extends StatelessWidget {
+  const NewsListView({super.key, required this.articleList});
 
-  @override
-  State<NewsListView> createState() => _NewsListViewState();
-}
-
-class _NewsListViewState extends State<NewsListView> {
-  List<ArticleModel> articleList = [];
-  @override
-  void initState() {
-    super.initState();
-    getNews();
-  }
-
-  Future<void> getNews() async {
-    articleList = await NewsService(Dio()).getNews();
-    setState(() {});
-  }
+  final List<ArticleModel> articleList;
 
   @override
   Widget build(BuildContext context) {
