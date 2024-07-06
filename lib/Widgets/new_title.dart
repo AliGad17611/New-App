@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/Models/article_model.dart';
 
 class NewsTitle extends StatelessWidget {
-  const NewsTitle({
+  const NewsTitle({required this.article,
     super.key,
   });
+  final ArticleModel article ;
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -11,20 +15,20 @@ class NewsTitle extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: const Image(
+          child: Image(
               image: NetworkImage(
-                  'https://media.gemini.media/img/yallakora/Wide//2024/6/22/turkiye-v-portugal-group-f-uefa-euro-2024-1-2024_6_22_20_22.jpg')),
+                  article.urlToImage!),),
         ),
-        const Text(
-          "رونالدو أمام مبابي.. موعد قمة ربع نهائي يورو 2024 بين البرتغال وفرنسا",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+         Text(
+          article.title,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
           textDirection: TextDirection.rtl,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        const Text(
-          "حسم منتخب البرتغال تأهله إلى الدور ربع النهائي بعدما انتصر على سلوفينيا بركلات الترجيح بنتيجة 3-0، خلال اللقاء الذي أقيم ضمن مباريات ثمن نهائي بطولة أمم أوروبا 2024.",
-          style: TextStyle(fontSize: 18, color: Colors.grey),
+         Text(
+          article.description??"",
+          style: const TextStyle(fontSize: 18, color: Colors.grey),
           textDirection: TextDirection.rtl,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
