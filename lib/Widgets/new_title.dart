@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/Models/article_model.dart';
+import 'package:news_app/Widgets/custom_image.dart';
 
 class NewsTitle extends StatelessWidget {
   const NewsTitle({required this.article,
@@ -13,12 +14,7 @@ class NewsTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image(
-              image: NetworkImage(
-                  article.urlToImage!),),
-        ),
+        CustomImage(imageUrl: article.urlToImage),
          Text(
           article.title,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 21),

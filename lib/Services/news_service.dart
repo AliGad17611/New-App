@@ -20,6 +20,7 @@ class NewsService {
             title: article["title"],
             description: article["description"],
             urlToImage: imageUrl,
+            websiteUrl: article["url"],
           );
           articleList.add(articleModel);
         }
