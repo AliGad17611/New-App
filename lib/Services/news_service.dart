@@ -16,12 +16,7 @@ class NewsService {
       for (var article in jsonData["articles"]) {
         String? imageUrl = article["image"];
         if (imageUrl != null && await isValidImageUrl(imageUrl)) {
-          ArticleModel articleModel = ArticleModel(
-            title: article["title"],
-            description: article["description"],
-            urlToImage: imageUrl,
-            websiteUrl: article["url"],
-          );
+          ArticleModel articleModel = ArticleModel.fromJson(article);
           articleList.add(articleModel);
         }
       }
